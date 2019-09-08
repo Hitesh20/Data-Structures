@@ -61,26 +61,30 @@ void insertAtPosition(int pos,int item)
 	n->prev = NULL;
 	n->next =NULL;
 	int counter;
-	curr=start;
-	for(counter=0; counter< pos-1;counter++)
+	int count = 0;
+	curr = start;
+	while(curr->next!=NULL)
 	{
-		back = curr;
-		curr=curr->next;
+		count++;
+		curr = curr->next;
 	}
-	if(counter==0)
+	count++;
+	if(pos==1)
 	{
 		insertAtFirst(item);
 	}
-	else if(curr == tail)
-	{
-		insertAtLast(item);
-	}
 	else
 	{
-		n->next = curr;
-		n->prev = back;
-		curr->prev = n;
+		curr=start;
+		for(counter=1; counter< pos; counter++)
+		{
+			back = curr;
+			curr=curr->next;
+		}
 		back->next = n;
+		n->prev = back;
+		n->next = curr;
+		curr->prev = n;
 	}
 }
 void removeFirst()
