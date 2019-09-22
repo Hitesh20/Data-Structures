@@ -171,7 +171,43 @@ void findMiddle()
 		printf("List is Empty");
 	}
 }
-
+void removeDuplicateUnsorted()
+{
+	struct Node *curr, *curr2, *dup;
+	curr = head;
+	while(curr!=NULL && curr->link!=NULL)
+	{
+		curr2 = curr;
+		while(curr2->link!=NULL)
+		{
+			if(curr->data == curr2->link->data)
+			{
+				curr2->link = curr2->link->link;
+			}
+			else
+			{
+				curr2 = curr2->link;
+			}	
+		}
+		curr = curr->link;
+	}
+}
+void removeDuplicateSorted()
+{
+	struct Node *curr;
+	curr = head;
+	while(curr->link!=NULL)
+	{
+		if(curr->data == curr->link->data)
+		{
+			curr->link = curr->link->link;
+		}
+		else
+		{
+			curr = curr->link;
+		}
+	}
+}
 int main()
 {
 	int choice,item,index;
@@ -188,7 +224,9 @@ int main()
 		printf("\n8. Print");
 		printf("\n9. Delete With Value");
 		printf("\n10. Find middle element");
-		printf("\n11. Exit");
+		printf("\n11. Remove Duplicate in Unsorted Linked List");
+		printf("\n12. Remove Duplicate in Sorted Linked List");
+		printf("\n13. Exit");
 		printf("\nEnter Your Choice");
 		scanf("%d",&choice);
 		switch(choice)
@@ -228,8 +266,14 @@ int main()
 				break;
 			case 10:
 				findMiddle();
-				break;	
+				break;
 			case 11:
+				removeDuplicateUnsorted();
+				break;
+			case 12:
+				removeDuplicateSorted();
+				break;
+			case 13:
 				flag = false;
 				break;
 		}
